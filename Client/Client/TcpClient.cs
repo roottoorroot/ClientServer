@@ -15,11 +15,11 @@ namespace Client
         string _otdel;
         string _miniline;
         string _allline;
-        IPAddress _ip;
+        string _ip;
         public string ansver;
         string putch = @"D:\Project\Client\Base\log.txt";
 
-        public TcpClient(string less1, string less2, string less3, string less4, IPAddress ip)
+        public TcpClient(string less1, string less2, string less3, string less4, string ip)
         {
             _ingener = less1 + "|";
             _otdel = less2 + "|";
@@ -39,8 +39,11 @@ namespace Client
             // Connect to a remote device.
             try
             {
-              
-                IPAddress ipAddress = _ip;
+
+                IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName()); //Для теста айпи 
+                IPAddress ipAddress1 = ipHostInfo.AddressList[0];
+
+                IPAddress ipAddress = IPAddress.Parse(_ip);
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 12345);
 
                 // Create a TCP/IP  socket.

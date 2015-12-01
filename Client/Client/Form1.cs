@@ -18,6 +18,8 @@ namespace Client
         public string putchLog = @"D:\Project\Client\Base\log.txt";
         public string putchInjeners = @"D:\Project\Client\Config\injener.txt";
         public string putchInOtdel = @"D:\Project\Client\Config\otdel.txt";
+        public string putchInServer = @"D:\Project\Client\Config\server.txt";
+        string ip;
         public int nowOutZayavki = 0;
         public string[] all_Ingeners;
 
@@ -28,6 +30,7 @@ namespace Client
             InitComponent();
             InitializeListOFIngeners(comboBox1, 3, putchInjeners);
             InitializeListOFIngeners(comboBox2, 1, putchInOtdel);
+            ip = InitializeListOFIp(putchInServer);
         }
 
         public void InitComponent()
@@ -46,9 +49,9 @@ namespace Client
             button2.Text = "";
             button3.Text = "";
 
-           
-            IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
-            ipAddres = ipHostInfo.AddressList[0];
+
+            //IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
+            //ipAddres = ipHostInfo.AddressList[0];
             
 
 
@@ -56,7 +59,7 @@ namespace Client
         private void button2_Click(object sender, EventArgs e)
         {
             string ansverClient = "";
-            TcpClient client = new TcpClient(comboBox1.Text, comboBox2.Text, textBox1.Text, richTextBox1.Text, ipAddres);
+            TcpClient client = new TcpClient(comboBox1.Text, comboBox2.Text, textBox1.Text, richTextBox1.Text, ip);
             
             try
             {
@@ -185,6 +188,36 @@ namespace Client
         private void button1_Click(object sender, EventArgs e)
         {
             InitComponent();
+        }
+        private string InitializeListOFIp(string putchServer)
+        {
+            string _ip = "";
+            string tmp = "";
+          
+            try
+            {
+               StreamReader reader = File.OpenText(putchServer);
+               tmp = reader.ReadToEnd();
+               reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка в InitText: \r" + ex.ToString());
+            }
+
+            string[] less = tmp.Split('*');
+
+            for (int i = 0; i < less.Length; i++)
+            {
+                less[i] = less[i].Replace("\r\n", string.Empty);
+            }
+
+            _ip = less[0];
+
+
+           
+
+            return _ip;
         }
     }
 }
