@@ -45,7 +45,7 @@ namespace Client
             label7.Text = "Общее кол-во обращений: ";
             label8.Text = Convert.ToString(KolZayavokAllTime());
             label6.Text = Convert.ToString(nowOutZayavki);
-            button1.Text = "Отмена";
+            button1.Text = "";
             button2.Text = "";
             button3.Text = "";
 
@@ -58,34 +58,42 @@ namespace Client
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            string ansverClient = "";
-            TcpClient client = new TcpClient(comboBox1.Text, comboBox2.Text, textBox1.Text, richTextBox1.Text, ip);
-            
-            try
+            if (IsEmptyField() == false)
             {
-                client.StartClient();
-                ansverClient = client.ansver;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Произошла ошибка в модуле отправки сообщения: " + ex.ToString());
-            }
+                string ansverClient = "";
+                TcpClient client = new TcpClient(comboBox1.Text, comboBox2.Text, textBox1.Text, richTextBox1.Text, ip);
+
+                try
+                {
+                    client.StartClient();
+                    ansverClient = client.ansver;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Произошла ошибка в модуле отправки сообщения: " + ex.ToString());
+                }
 
 
-            if (ansverClient != "Ok")
-            {
-                MessageBox.Show("Произошла внутрення системная ошибка! \r Просьба обратиться к системному \r Администратору");
-                return;
+                if (ansverClient != "Ok")
+                {
+                    MessageBox.Show("Произошла внутрення системная ошибка! \r Просьба обратиться к системному \r Администратору");
+                    return;
+                }
+                else
+                {
+                    client.WriteInLogFile(comboBox1.Text, comboBox2.Text, textBox1.Text, richTextBox1.Text);
+                    nowOutZayavki++;
+                    InitComponent();
+                    MessageBox.Show(" Ответ сервера:... " + ansverClient + "\r Заявка отправлена \r Можете закрыть программу");
+
+
+                }
             }
             else
             {
-                client.WriteInLogFile(comboBox1.Text, comboBox2.Text, textBox1.Text, richTextBox1.Text);
-                nowOutZayavki++;
-                InitComponent();
-                MessageBox.Show(" Ответ сервера:... " + ansverClient +  "\r Заявка отправлена \r Можете закрыть программу");
-                
-               
+                MessageBox.Show("Заполните поля выделенные красным цветом");
             }
+
         }
         private int KolZayavokAllTime()
         {
@@ -187,7 +195,7 @@ namespace Client
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            InitComponent();
+            CleanClear();
         }
         private string InitializeListOFIp(string putchServer)
         {
@@ -218,6 +226,80 @@ namespace Client
            
 
             return _ip;
+        }
+        private string InitializeListOFDisk(string putchDisk)
+        {
+            string _disk = "";
+            string tmp = "";
+
+            try
+            {
+                StreamReader reader = File.OpenText(putchDisk);
+                tmp = reader.ReadToEnd();
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка в InitText: \r" + ex.ToString());
+            }
+
+            string[] less = tmp.Split('*');
+
+            for (int i = 0; i < less.Length; i++)
+            {
+                less[i] = less[i].Replace("\r\n", string.Empty);
+            }
+
+            _disk = less[0];
+
+
+
+
+            return _disk;
+        }
+        private bool IsEmptyField()
+        {
+            bool isempty = false;
+            if((textBox1.Text == "") || (richTextBox1.Text == "" ) || (comboBox1.Text == "") || (comboBox2.Text == ""))
+            {
+                if (textBox1.Text == "")
+                {
+                    textBox1.BackColor = Color.Coral;
+                    isempty = true;
+                }
+                
+                if (richTextBox1.Text == "")
+                {
+                    richTextBox1.BackColor = Color.Coral;
+                    isempty = true;
+                }
+
+                if (comboBox1.Text == "")
+                {
+                            comboBox1.BackColor = Color.Coral;
+                            isempty = true;
+                }
+                if (comboBox2.Text == "")
+                {
+                     comboBox2.BackColor = Color.Coral;
+                     isempty = true;
+                }
+                 
+            }
+
+            return isempty;
+        }
+        private void CleanClear()
+        {
+            textBox1.Text = "";
+            textBox1.BackColor = Color.White;
+            richTextBox1.Text = "";
+            richTextBox1.BackColor = Color.White;
+            comboBox1.BackColor = Color.White;
+            comboBox2.BackColor = Color.White;
+            button1.Text = "";
+            button2.Text = "";
+            button3.Text = "";
         }
     }
 }

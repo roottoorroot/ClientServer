@@ -58,8 +58,9 @@
             // 
             // button1
             // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(672, 484);
+            this.button1.Location = new System.Drawing.Point(679, 484);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(48, 48);
             this.button1.TabIndex = 6;
@@ -183,15 +184,15 @@
             // 
             // rectangleShape3
             // 
-            this.rectangleShape3.Location = new System.Drawing.Point(22, 206);
+            this.rectangleShape3.Location = new System.Drawing.Point(22, 205);
             this.rectangleShape3.Name = "rectangleShape3";
-            this.rectangleShape3.Size = new System.Drawing.Size(522, 75);
+            this.rectangleShape3.Size = new System.Drawing.Size(522, 76);
             // 
             // rectangleShape2
             // 
-            this.rectangleShape2.Location = new System.Drawing.Point(22, 139);
+            this.rectangleShape2.Location = new System.Drawing.Point(22, 138);
             this.rectangleShape2.Name = "rectangleShape2";
-            this.rectangleShape2.Size = new System.Drawing.Size(522, 73);
+            this.rectangleShape2.Size = new System.Drawing.Size(522, 74);
             // 
             // rectangleShape1
             // 
