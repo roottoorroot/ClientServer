@@ -123,13 +123,9 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Долгополов Алексей Викторович",
-            "Шостак Александр Петрович",
-            "Гвоздик Андрей Александрович",
-            "Воробьев Александр Сергеевич",
-            "Бисеров Иван Петрович"});
             this.comboBox1.Location = new System.Drawing.Point(122, 19);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(221, 21);
@@ -157,6 +153,7 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(122, 65);
             this.comboBox2.Name = "comboBox2";

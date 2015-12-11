@@ -29,12 +29,13 @@ namespace Prototype_v1_1_Ing
             initConfig();
             incDefault();
             FormingTable(1);
-            comboBox1.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //comboBox1.AutoCompleteMode = AutoCompleteMode.Suggest;
+            //comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox2.AutoCompleteMode = AutoCompleteMode.Suggest;
             comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
             InitializeList(comboBox2, 1, putchInOtdel);
             InitializeList(comboBox1, 1, putchInitSotr);
+            comboBox1.SelectedIndex = 0;
         }
 
 
@@ -406,7 +407,7 @@ namespace Prototype_v1_1_Ing
                 cmb.Items.Add(all_Ingeners[i] + "\r");
             }
 
-
+            
 
 
 
