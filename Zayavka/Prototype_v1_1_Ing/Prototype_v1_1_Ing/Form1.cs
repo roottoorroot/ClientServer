@@ -19,16 +19,17 @@ namespace Prototype_v1_1_Ing
         public string _ip;
         public string putchInOtdel = @"C:\log\otdel.txt";
         public string putchInitSotr = @"C:\log\injener.txt";
+        public string putchOpenlog = @"C:\log\openlog.txt";
         public string[] all_Ingeners;
 
 
         public Form1()
         {
             InitializeComponent();
-            button3.Enabled = false;
+            button3.Enabled = true;
             initConfig();
             incDefault();
-            FormingTable(1);
+            FormingTable();
             //comboBox1.AutoCompleteMode = AutoCompleteMode.Suggest;
             //comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox2.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -39,50 +40,32 @@ namespace Prototype_v1_1_Ing
         }
 
 
-        public void FormingTable(int i)
+        public void FormingTable()
         {
-            switch (i)
-            {
-                case 1:
-                    {
+            
+               
                         dataGridView1.Columns.Add("A0", "№");
                         dataGridView1.Columns.Add("A1", "Время открытия");
                         dataGridView1.Columns.Add("A2", "Время Закрытия");
                         dataGridView1.Columns.Add("A3", "Инженер");
                         dataGridView1.Columns.Add("A4", "Отделение");
-                        dataGridView1.Columns.Add("A5", "Краткое описание");
-                        //dataGridView1.Columns.Add("A6", "Полное описание");
+                        dataGridView1.Columns.Add("A5", "Наименование оборудования");
                         dataGridView1.Columns.Add("A6", "Состояние");
+                        dataGridView1.Columns.Add("A7", "id");
+                        dataGridView1.Columns.Add("A8", "...");
                         dataGridView1.Columns[0].Width = 20;
                         dataGridView1.Columns[1].Width = 120;
                         dataGridView1.Columns[2].Width = 120;
                         dataGridView1.Columns[3].Width = 120;
                         dataGridView1.Columns[4].Width = 120;
                         dataGridView1.Columns[5].Width = 167;
-                        //dataGridView1.Columns[6].Width = 190;
                         dataGridView1.Columns[6].Width = 80;
-                    }
-                    break;
-                case 2:
-                    {
-                        //dataGridView2.ColumnCount = 0;
-                        //dataGridView2.Columns.Add("A0", "Время открытия");
-                        //dataGridView2.Columns.Add("A1", "Время Закрытия");
-                        //dataGridView2.Columns.Add("A2", "Инженер");
-                        //dataGridView2.Columns.Add("A3", "Отделение");
-                        //dataGridView2.Columns.Add("A4", "Краткое описание");
-                        //dataGridView2.Columns.Add("A5", "Полное описание");
-                        //dataGridView2.Columns.Add("A6", "...");
+                        dataGridView1.Columns[7].Width = 10;
+                        dataGridView1.Columns[8].Width = 5;
+                       
 
-                        //dataGridView2.Columns[0].Width = 120;
-                        //dataGridView2.Columns[1].Width = 120;
-                        //dataGridView2.Columns[2].Width = 90;
-                        //dataGridView2.Columns[3].Width = 80;
-                        //dataGridView2.Columns[4].Width = 150;
-                        //dataGridView2.Columns[5].Width = 100;
-                    }
-                    break;
-            }
+                        DataGridVseZayavki(putchOpenlog);
+
 
         }
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -121,6 +104,7 @@ namespace Prototype_v1_1_Ing
                 string lineB = comboBox2.Text;
                 string lineC = richTextBox2.Text;
                 string lineD = richTextBox1.Text;
+                string lineId = CreateId();
                 
                 try
                 {
@@ -159,7 +143,7 @@ namespace Prototype_v1_1_Ing
                     pictureBox2.Visible = false;
                     pictureBox3.Visible = false;
                     pictureBox4.Visible = false;
-                    AddDataTabs(lineA, lineB, lineC);
+                    AddDataTabs(lineA, lineB, lineC, lineId);
                     _count++;
                     label7.Text = Convert.ToString(_count);
                 }
@@ -176,11 +160,12 @@ namespace Prototype_v1_1_Ing
 
             
         }
-        void AddDataTabs(string _linaA, string _lineB, string _lineC)
+        void AddDataTabs(string _linaA, string _lineB, string _lineC, string _lineId)
         {
+            string datatime = "";
             Invoke(new Action(() =>
             {
-                string datatime = DateTime.Now.ToString();
+                datatime = DateTime.Now.ToString();
                 //string[] list = str.Split('|');
                 dataGridView1.Rows.Add();
                 dataGridView1.Rows[dataGridView1.Rows.Count - 2].Cells[0].Value = dataGridView1.Rows.Count - 1;
@@ -189,6 +174,7 @@ namespace Prototype_v1_1_Ing
                 dataGridView1.Rows[dataGridView1.Rows.Count - 2].Cells[4].Value = _lineB;
                 dataGridView1.Rows[dataGridView1.Rows.Count - 2].Cells[5].Value = _lineC;
                 dataGridView1.Rows[dataGridView1.Rows.Count - 2].Cells[6].Value = "Активная";
+                dataGridView1.Rows[dataGridView1.Rows.Count - 2].Cells[7].Value = _lineId;
                 //Coloring allocated cells
                 for (int i = 0; i < dataGridView1.ColumnCount; i++)
                 {
@@ -199,6 +185,19 @@ namespace Prototype_v1_1_Ing
 
 
             }));
+
+
+            string new_responce = "";
+            new_responce = new_responce + Convert.ToString(dataGridView1.Rows.Count - 1) + "|" + datatime + "|"+ " |" + _linaA + "|" + _lineB + "|" + _lineC + "|" + "Активная" + "|" + _lineId + "|";
+
+           
+
+            LoggInFileClose(putchOpenlog, new_responce);
+
+
+
+
+
         }
         private void новаяЗаявкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -269,6 +268,7 @@ namespace Prototype_v1_1_Ing
             string putchClose = @"C:\log\closeLog.txt";
             string datatime = DateTime.Now.ToString();
             string new_responce = "";
+            string _id = "";
 
 
             for (int i = 0; i < dataGridView1.RowCount; i++)
@@ -287,11 +287,12 @@ namespace Prototype_v1_1_Ing
                         dataGridView1.CurrentCell.Style.BackColor = Color.LightGreen;
                         dataGridView1.ClearSelection();
                         new_responce = new_responce + dataGridView1.Rows[i].Cells[z].Value + "|";
+                        _id = dataGridView1.Rows[i].Cells[7].Value + "";
                        
                     }
                 }
             }
-
+            DellFromFile(putchOpenlog, _id);
             LoggInFileClose(putchClose, new_responce);
 
             
@@ -312,6 +313,7 @@ namespace Prototype_v1_1_Ing
             log.WriteLine(less[4] + "|");
             log.WriteLine(less[5] + "|");
             log.WriteLine(less[6] + "|");
+            log.WriteLine(less[7] + "|");
             log.Write("*");
             log.Close();
 
@@ -414,6 +416,192 @@ namespace Prototype_v1_1_Ing
 
 
             int tmp = 0;
+        }
+        public void DataGridVseZayavki(string patch)
+        {
+            string filelog = "";
+            int count = 0;
+
+
+            //dataGridView1.RowCount = 1;
+
+
+            try
+            {
+                StreamReader reader = File.OpenText(patch);
+                filelog = reader.ReadToEnd();
+                reader.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Ошибка в InitText: \r" + e.ToString());
+            }
+
+            for (int i = 0; i < filelog.Length; i++)
+            {
+                if (filelog[i] == '*') count++;
+            }
+
+
+
+            string[] less = filelog.Split('*');
+            for (int i = 0; i < less.Length; i++)
+            {
+                less[i] = less[i].Replace("\r\n", string.Empty);
+
+            }
+
+            string[][] ls = new string[less.Length][];
+            for (int i = 0; i < less.Length; i++)
+            {
+                ls[i] = less[i].Split('|');
+            }
+
+
+            dataGridView1.Columns[0].Width = 10;
+            dataGridView1.Columns[1].Width = 120;
+            dataGridView1.Columns[2].Width = 90;
+            dataGridView1.Columns[3].Width = 80;
+            dataGridView1.Columns[4].Width = 150;
+            dataGridView1.Columns[5].Width = 100;
+            dataGridView1.Columns[6].Width = 174;
+            dataGridView1.Columns[7].Width = 10;
+            for (int i = 0; i < count + 1; i++)
+            {
+                dataGridView1.Rows.Add();
+            }
+
+
+
+            for (int i = 0; i < ls.Length; i++)
+            {
+                for (int j = 0; j < ls[i].Length; j++)
+                {
+                    dataGridView1.Rows[i].Cells[j].Value = ls[i][j];
+                }
+            }
+
+
+
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    if (dataGridView1.Rows[i].Cells[j].Value != null)
+                    {
+                        dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[j];
+                        dataGridView1.CurrentCell.Style.BackColor = Color.LightPink;
+                    }
+                    else
+                    {
+                            dataGridView1.CurrentCell = dataGridView1.Rows[i].Cells[j];
+                            dataGridView1.CurrentCell.Style.BackColor = Color.White;
+                    }
+                }
+              
+            }     
+        }
+        private void DellFromFile(string putch, string id)
+        {
+            string filelog = "";
+            int count = 0;
+            try
+            {
+                StreamReader reader = File.OpenText(putch);
+                filelog = reader.ReadToEnd();
+                reader.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Ошибка в InitText: \r" + e.ToString());
+            }
+
+
+            for (int i = 0; i < filelog.Length; i++)
+            {
+                if (filelog[i] == '*') count++;
+            }
+
+
+
+            string[] less = filelog.Split('*');
+            
+
+            List<string> lstLine = new List<string>();
+
+
+            for (int i = 0; i < less.Length; i++)
+            {
+                lstLine.Add(less[i]);
+
+            }
+
+            //Поиск по списку
+           
+            int num = 0;
+            //Удаляем лишний элемент в списке:
+            lstLine.Remove(lstLine[lstLine.Count - 1]);
+            for (int i = 0; i < lstLine.Count; i++)
+            {
+               num = lstLine[i].IndexOf(id);
+               if (num > -1)
+               {
+               
+                   //Удаление элемента по найденому id
+                   lstLine.Remove(lstLine[i]);
+               }
+               
+            }
+            
+            //Запись остатка листа обратно в файл
+
+            WriteInFileOpen(putchOpenlog, lstLine);
+
+            
+            
+
+
+
+
+            int g = 0;
+        }
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DellFromFile(putchOpenlog, "205363054");
+            //CreateId();
+        }
+        private void WriteInFileOpen(string putch, List<string> lst)
+        {
+            StreamWriter log = new StreamWriter(putch, false);
+            for (int i = 0; i < lst.Count; i++)
+            {
+                log.Write(lst[i]);
+                log.Write("*");
+            }
+
+            log.Close();
+
+            //string[] less = received.Split('|');
+            //string tnow = DateTime.Now.ToString();
+            //log.WriteLine();
+        }
+        private string CreateId()
+        {
+            string id = "";
+            int tmp = 0;
+            string tmpLine = "";
+            Random rnd = new Random();
+            for (int i = 0; i < 3; i++)
+            {
+                tmp +=  rnd.Next(100);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                tmpLine += Convert.ToString(rnd.Next(100));
+            }
+
+            id = Convert.ToString(tmp) + tmpLine;
+            return id;
         }
         
     }

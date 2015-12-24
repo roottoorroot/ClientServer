@@ -28,7 +28,9 @@ namespace Prototype_v1_1_Ing
             dataGridView1.Columns.Add("A4", "Отделение");
             dataGridView1.Columns.Add("A5", "Оборудование");
             dataGridView1.Columns.Add("A6", "Состояние");
-            dataGridView1.Columns.Add("A7", "...");
+            dataGridView1.Columns.Add("A7", "Id");
+            dataGridView1.Columns.Add("A8", "...");
+
             dataGridView1.Columns[0].Width = 10;
             dataGridView1.Columns[1].Width = 120;
             dataGridView1.Columns[2].Width = 120;
@@ -37,6 +39,7 @@ namespace Prototype_v1_1_Ing
             dataGridView1.Columns[5].Width = 167;
             dataGridView1.Columns[6].Width = 80;
             dataGridView1.Columns[7].Width = 20;
+            dataGridView1.Columns[8].Width = 10;
             
         }
 
@@ -88,6 +91,8 @@ namespace Prototype_v1_1_Ing
             dataGridView1.Columns[4].Width = 150;
             dataGridView1.Columns[5].Width = 100;
             dataGridView1.Columns[6].Width = 174;
+            dataGridView1.Columns[7].Width = 10;
+            dataGridView1.Columns[8].Width = 10;
             for (int i = 0; i < count + 1; i++)
             {
                 dataGridView1.Rows.Add();

@@ -238,6 +238,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(8, 19);
             this.dataGridView1.Name = "dataGridView1";
@@ -369,7 +370,7 @@
             // инфоToolStripMenuItem1
             // 
             this.инфоToolStripMenuItem1.Name = "инфоToolStripMenuItem1";
-            this.инфоToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
+            this.инфоToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.инфоToolStripMenuItem1.Text = "Сервер";
             this.инфоToolStripMenuItem1.Click += new System.EventHandler(this.инфоToolStripMenuItem1_Click);
             // 

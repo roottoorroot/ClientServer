@@ -18,3 +18,13 @@ G:\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_In
 G:\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.Properties.Resources.resources
 G:\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.csproj.GenerateResource.Cache
 G:\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.AllView.resources
+D:\Project\ClientServer\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.exe
+D:\Project\ClientServer\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.pdb
+D:\Project\ClientServer\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\bin\Debug\Prototype_v1_1_Ing.exe
+D:\Project\ClientServer\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\bin\Debug\Prototype_v1_1_Ing.pdb
+D:\Project\ClientServer\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.csprojResolveAssemblyReference.cache
+D:\Project\ClientServer\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.AllView.resources
+D:\Project\ClientServer\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.Form1.resources
+D:\Project\ClientServer\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.MServer.resources
+D:\Project\ClientServer\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.Properties.Resources.resources
+D:\Project\ClientServer\Zayavka\Prototype_v1_1_Ing\Prototype_v1_1_Ing\obj\x86\Debug\Prototype_v1_1_Ing.csproj.GenerateResource.Cache
